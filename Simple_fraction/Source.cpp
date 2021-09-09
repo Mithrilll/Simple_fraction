@@ -10,7 +10,12 @@ int main()
 	std::cout << std::endl;
 	f2.Print();
 
-	f = f + f2;
+	f = f - f2;
+
+	std::cout << std::endl;
+	f.Print();
+
+	f = f - f2;
 
 	std::cout << std::endl;
 	f.Print();

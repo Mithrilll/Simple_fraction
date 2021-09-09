@@ -77,4 +77,11 @@ void Fraction::Reduce()
 
 	this->m_numerator /= n;
 	this->m_denomirator /= n;
+
+	if (this->m_denomirator < 0)
+	{
+		this->m_numerator *= -1;
+		this->m_denomirator *= -1;
+	}
+
 }
