@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <iostream>
 
 //
 //- конструктор (по умолчанию + как минимум один конструктор с параметрами);
@@ -18,35 +19,36 @@ public:
 	Fraction() // конструктор по умолчанию
 	{
 		m_numerator = 0;
-		m_denomirator = 1;
+		m_denominator = 1;
 	}
 
 	Fraction(int n, int d = 1) // констурток с параметрами - числитель и знаментель(по умочанию 1)
 	{
 		m_numerator = n;
-		m_denomirator = d;
+		m_denominator = d;
 	}
 
 
-	int GetNumerator() { return m_numerator; }								// возвращает числитель
-	void SetNumerator(int item) { m_numerator = item; }						// устанавливает числитель
-	int GetDenomirator() { return m_denomirator; }							// возвращает знаменатель
-	void SetDenomirator(int item) { m_denomirator = item; }					// устанавливает знаменатель
+	int GetNumerator() const { return m_numerator; }								// возвращает числитель
+	void SetNumerator(int numerator) { m_numerator = numerator; }					// устанавливает числитель
+	int GetDenomirator() const { return m_denominator; }							// возвращает знаменатель
+	void SetDenomirator(int denominator) { m_denominator = denominator; }			// устанавливает знаменатель
 
-	friend Fraction operator+(const Fraction& item1, const Fraction& item2);// перегрузка операции сложения
-	friend Fraction operator-(const Fraction& item1, const Fraction& item2);// перегрузка операции вычитания
-	friend Fraction operator*(const Fraction& item1, const Fraction& item2);// перегрузка операции умножения
-	friend Fraction operator/(const Fraction& item1, const Fraction& item2);// перегрузка операции деления
+	Fraction operator+(const Fraction& second_operand);	// перегрузка операции сложения
+	Fraction operator-(const Fraction& second_operand);	// перегрузка операции вычитания
+	Fraction operator*(const Fraction& second_operand);	// перегрузка операции умножения
+	Fraction operator/(const Fraction& second_operand);	// перегрузка операции деления
 
-	friend bool operator>(const Fraction& item1, const Fraction& item2);	// перегрузка операции >
-	friend bool operator<(const Fraction& item1, const Fraction& item2);	// перегрузка операции <
-	friend bool operator==(const Fraction& item1, const Fraction& item2);	// перегрузка операции ==
-	friend bool operator!=(const Fraction& item1, const Fraction& item2);	// перегрузка операции !=
+	bool operator>(const Fraction& second_operand);		// перегрузка операции >
+	bool operator<(const Fraction& second_operand);		// перегрузка операции <
+	bool operator==(const Fraction& second_operand);	// перегрузка операции ==
+	bool operator!=(const Fraction& second_operand);	// перегрузка операции !=
 
-	void Print();	// вывод дроби в консоль
+	friend std::ostream& operator<<(std::ostream& out, const Fraction& frac);	// перегрузка оператора вывода
+	friend std::istream& operator>>(std::istream& in, Fraction& frac);	// перегрузка оператора ввода
 
 	void MakeSimple(double item, int precision);	// создание простой дроби из числа с плавающей точкой
-	float GetFloat() { return static_cast<float>(m_numerator) / static_cast<float>(m_denomirator); }	// возвращает число с плавающей точкой на основе простой дроби
+	float GetFloat() const { return static_cast<float>(m_numerator) / static_cast<float>(m_denominator); }	// возвращает число с плавающей точкой на основе простой дроби
 
 
 private:
@@ -56,5 +58,5 @@ private:
 private:
 
 	int m_numerator;	// числитель
-	int m_denomirator;	// знаменатель
+	int m_denominator;	// знаменатель
 };
